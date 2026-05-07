@@ -14,20 +14,24 @@
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-  <div class="container-fluid page">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-sm-2 bg-dark min-vh-100 p-0 sidebar">
+      <nav class="col-md-3 col-lg-2 bg-dark min-vh-100 p-3 sidebar text-white">
         {% block sidebar %}
         {% include "includes/sidebar.html" %}
         {% endblock %}
-      </div>
-      <div class="col-sm-10 content">
-        {% block content %}
-        {% endblock %}
-        {% block pagination %}
-          {% include "includes/pagination.html" %}
-        {% endblock %}
-      </div>
+      </nav>
+      <main class="col-md-9 col-lg-10 p-4">
+        <div class="content">
+          {% block content %}
+          {% endblock %}
+        </div>
+        <div class="mt-4">
+          {% block pagination %}
+            {% include "includes/pagination.html" %}
+          {% endblock %}
+        </div>
+      </main>
     </div>
   </div>
 </body>
