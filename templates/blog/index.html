@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Blog Statistics</h1>
+  <p>Welcome to Best Blog Ever!</p>
+  <p>Welcome to our blog system! Here is some information about our content:</p>
+  <ul>
+    <li><strong>Total Posts:</strong> {{ post_count }}</li>
+  </ul>
+  <table class="table table-sm table-striped table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>No.</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Created Date</th>
+        <th>Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for post in post_list %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>
+            <a href="{% url 'blog:post-detail' pk=post.id %}">{{ post.title }}</a>
+          </td>
+          <td>{{ post.owner.username }}</td>
+          <td>{{ post.created_time|date:"Y-m-d H:i" }}</td>
+          <td>{{ post.comments.count }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="4" class="text-center">No posts found.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p>You have visited this page
+    {{ num_visits }} time{{ num_visits|pluralize }}.
+  </p>
+{% endblock %}
