@@ -2,17 +2,16 @@
 
 {% block content %}
   <h1>Post: {{ post.title }}</h1>
-  {# Dodaj filtr linebreaks, żeby tekst nie był zbity w jedną masę #}
   <p>{{ post.content|linebreaks }}</p>
 
   <div class="mb-3">
     <h4>Author details:</h4>
-    <div class="ms-3"> {# W Bootstrap 5 używamy ms-3 zamiast ml-3 #}
+    <div class="ms-3">
       <p><strong>Username: </strong>{{ post.owner.username }}</p>
       <p><strong>Published: </strong>{{ post.created_time|date:"Y-m-d H:i" }}</p>
     </div>
 
-    <h4 class="mt-4">Comments:</h4>
+    <h4 class="mt-4">Comments: ({{ post.comments.count }})</h4>
     {% for comment in post.comments.all %}
       <div class="comment-item border-bottom mb-3 pb-3">
         {# d-flex ustawi treść po lewej, a przyciski po prawej #}
